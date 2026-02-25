@@ -11,7 +11,7 @@ const app = express();
 //---------Frontend to backend usee------
 app.use(cors({
 //   origin: ["http://localhost:5173", "https://synapseai-backend-production.up.railway.app"]
-  origin:true,
+  origin:["http://localhost:5173"],
   credentials: true
 }));
 app.use(express.json());
@@ -20,14 +20,19 @@ app.use(express.json());
 
 //-----Authentication------------
 //----to remember that user is old or specfic user is login----
+
+// VERY IMPORTANT for Railway / HTTPS proxy
+app.set("trust proxy", 1);
+
+
 app.use(session({
     secret:"secret-key",
-    resave: false,
+    resave:false,
     saveUninitialized:false,
-    cookie: {
-        secure: process.env.NODE_ENV === "production",
-        httpOnly: true,
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+    cookie:{
+        secure:true,        // HTTPS only
+        httpOnly:true,
+        sameSite:"none"     // REQUIRED for cross domain
     }
 }))
 
