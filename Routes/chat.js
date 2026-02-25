@@ -111,6 +111,13 @@ router.post("/chat",isAuth,async(req,res)=>{
        }
 
        const reply = await gorqAPIResponse(messages);
+
+       // ✅ ADD THIS SAFETY CHECK HERE
+        if(!reply){
+        return res.status(500).json({
+            message:"AI failed to generate response"
+        });
+        }
        
        thread.messages.push({role:"assistant",content:reply});
 
