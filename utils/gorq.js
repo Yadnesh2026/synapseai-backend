@@ -1,5 +1,7 @@
 import "dotenv/config";
 
+console.log("GROQ KEY:", process.env.GROQ_API_KEY);
+
 //---All main logic for API serach which connect with Ai to User
 const gorqAPIResponse =  async(message)=>{
     const options = {

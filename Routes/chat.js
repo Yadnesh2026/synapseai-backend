@@ -86,6 +86,9 @@ router.delete("/thread/:threadId",isAuth,async(req,res)=>{
 
 //--------POST ROUTE - RESPONSE FROM AI
 router.post("/chat",isAuth,async(req,res)=>{
+
+    console.log("Calling Groq API..."); // ⭐ ADD THIS
+
     const {threadId,messages}=req.body;
 
     if(!threadId || !messages){

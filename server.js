@@ -10,7 +10,8 @@ const app = express();
 
 //---------Frontend to backend usee------
 app.use(cors({
-  origin: "http://localhost:5173",
+//   origin: ["http://localhost:5173", "https://synapseai-backend-production.up.railway.app"]
+  origin:true,
   credentials: true
 }));
 app.use(express.json());
@@ -22,7 +23,12 @@ app.use(express.json());
 app.use(session({
     secret:"secret-key",
     resave: false,
-    saveUninitialized:false
+    saveUninitialized:false,
+    cookie: {
+        secure: process.env.NODE_ENV === "production",
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
+    }
 }))
 
 //UNIVERSAL ROUTEE
