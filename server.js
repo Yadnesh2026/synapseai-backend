@@ -6,7 +6,7 @@ import chatRoute from "./Routes/chat.js"
 import session from "express-session";
 
 const app = express();
-const PORT =8111;
+// const PORT =8111;
 
 //---------Frontend to backend usee------
 app.use(cors({
@@ -61,10 +61,11 @@ connectDB();
 
 
 // ---------- SERVER ----------
-app.listen(PORT,()=>{
-    console.log("server is running")
-})
+const PORT = process.env.PORT || 8111;
 
+app.listen(PORT, () => {
+  console.log(`server is running on ${PORT}`);
+});
 
 
 
