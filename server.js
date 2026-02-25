@@ -11,7 +11,9 @@ const app = express();
 //---------Frontend to backend usee------
 app.use(cors({
 //   origin: ["http://localhost:5173", "https://synapseai-backend-production.up.railway.app"]
-  origin:["http://localhost:5173"],
+  origin:["http://localhost:5173",
+    "https://synapseai-frontend.vercel.app",
+    "https://synapseai-frontend-2i3e.vercel.app"],
   credentials: true
 }));
 app.use(express.json());
