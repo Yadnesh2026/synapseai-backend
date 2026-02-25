@@ -47,25 +47,44 @@ app.get("/",(req,res)=>{
     
 });
 
-// ---------- DB CONNECTION ----------
-const connectDB =async()=>{
-    try{
-        await mongoose.connect(process.env.MONGODB_URL);
-        console.log("Connected with DB")
-    }catch(err){
-        console.log("faileed to connect",err)
-    }
-}
-// Call DB connection when server starts
-connectDB();
+// // ---------- DB CONNECTION ----------
+// const connectDB =async()=>{
+//     try{
+//         await mongoose.connect(process.env.MONGODB_URL);
+//         console.log("Connected with DB")
+//     }catch(err){
+//         console.log("faileed to connect",err)
+//     }
+// }
+// // Call DB connection when server starts
+// connectDB();
 
 
-// ---------- SERVER ----------
+// // ---------- SERVER ----------
+// const PORT = process.env.PORT || 8111;
+
+// app.listen(PORT, () => {
+//   console.log(`server is running on ${PORT}`);
+// });
+
+// ---------- SERVER + DB ----------
 const PORT = process.env.PORT || 8111;
 
-app.listen(PORT, () => {
-  console.log(`server is running on ${PORT}`);
-});
+const startServer = async () => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Connected with DB");
+
+    app.listen(PORT, () => {
+      console.log(`Server is running on ${PORT}`);
+    });
+
+  } catch (err) {
+    console.error("Failed to connect to DB:", err);
+  }
+};
+
+startServer();
 
 
 
